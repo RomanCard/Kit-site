@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сиреневый кит — скоростной маникюр в Томске</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F4FB;
+            color: #4A3B6B;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- ОБЪЕМНЫЕ ПУЗЫРИ --- */
+        .bubbles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -1; pointer-events: none; overflow: hidden;
+        }
+        .bubble {
+            position: absolute; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(180, 151, 214, 0.2) 60%, rgba(180, 151, 214, 0.4));
+            box-shadow: inset -5px -5px 15px rgba(255,255,255,0.5), 0 0 10px rgba(180, 151, 214, 0.2);
+            animation: floatUp linear infinite; will-change: transform;
+        }
+        .bubble::after {
+            content: ''; position: absolute; top: 15%; left: 15%;
+            width: 25%; height: 25%; background: #fff;
+            border-radius: 50%; opacity: 0.8; filter: blur(1px);
+        }
+        .bubble:nth-child(1) { width: 60px; height: 60px; left: 10%; bottom: -60px; animation-duration: 8s; }
+        .bubble:nth-child(2) { width: 110px; height: 110px; left: 75%; bottom: -110px; animation-duration: 12s; animation-delay: 2s; }
+        .bubble:nth-child(3) { width: 40px; height: 40px; left: 30%; bottom: -40px; animation-duration: 6s; animation-delay: 4s; }
+        .bubble:nth-child(4) { width: 80px; height: 80px; left: 85%; bottom: -80px; animation-duration: 10s; animation-delay: 1s; }
+        .bubble:nth-child(5) { width: 50px; height: 50px; left: 45%; bottom: -50px; animation-duration: 7s; animation-delay: 3s; }
+        .bubble:nth-child(6) { width: 90px; height: 90px; left: -20px; bottom: -90px; animation-duration: 11s; animation-delay: 5s; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 0.8; } 90% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+        }
+
+        /* --- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (Вода) --- */
+        .float-in {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .float-in.visible {
+            opacity: 1; transform: translateY(0);
+        }
+
+        /* --- ШАПКА --- */
+        header { text-align: center; padding: 40px 20px 20px; }
+        .logo { font-size: 28px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .slogan { font-size: 16px; color: #B497D6; margin-top: 5px; font-weight: 500; }
+
+        /* --- ПРЕИМУЩЕСТВА (В ВЕРТИКАЛЬ) --- */
+        .features { 
+            display: flex; flex-direction: column; align-items: center; gap: 15px; padding: 20px; 
+        }
+        .feature-item {
+            background: #fff; border-radius: 50px; width: 80%; max-width: 300px; padding: 15px;
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            box-shadow: 0 5px 15px rgba(180, 151, 214, 0.2); font-weight: bold;
+        }
+        .feature-item span { font-size: 22px; color: #9FE2D4; }
+
+        /* --- НАШИ РАБОТЫ (В ВЕРТИКАЛЬ) --- */
+        .works { padding: 40px 20px; text-align: center; }
+        .section-title { font-size: 24px; margin-bottom: 20px; }
+        .grid { 
+            display: flex; flex-direction: column; align-items: center; gap: 25px; 
+        }
+        .card {
+            background: #fff;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Форма яйца */
+            padding: 30px 20px; width: 85%; max-width: 280px;
+            box-shadow: 0 10px 25px rgba(180, 151, 214, 0.15);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .card-photo {
+            width: 100%; height: 140px; background: #E8E0F0;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            display: flex; align-items: center; justify-content: center;
+            color: #B497D6; font-size: 14px; border: 2px dashed #B497D6; margin-bottom: 15px;
+        }
+        .card-title { font-size: 20px; margin-bottom: 5px; }
+        .card-price { color: #B497D6; font-weight: bold; font-size: 18px; }
+
+        /* --- ВОЛНА ПОСЕРЕДИНЕ --- */
+        .wave-container { width: 100%; overflow: hidden; line-height: 0; margin-top: 20px;}
+        .wave-container svg { display: block; width: 100%; height: 80px; }
+
+        /* --- КОНТАКТЫ --- */
+        .contacts { padding: 10px 20px 40px; background: #fff; text-align: center; position: relative; z-index: 10; }
+        .address { font-size: 16px; margin-bottom: 10px; color: #888; }
+        .phone { font-size: 20px; font-weight: bold; color: #4A3B6B; margin-bottom: 25px; display: block; text-decoration: none; }
+        
+        /* --- КНОПКИ С ЭФФЕКТОМ ВОДЫ --- */
+        .btn {
+            position: relative; overflow: hidden;
+            display: block; width: 100%; max-width: 300px; padding: 16px;
+            margin: 0 auto 15px; border-radius: 30px; text-decoration: none;
+            font-weight: bold; font-size: 16px; transition: transform 0.1s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-main { background: #9FE2D4; color: #4A3B6B; box-shadow: 0 4px 15px rgba(159, 226, 212, 0.5); }
+        .btn-secondary { background: #B497D6; color: #fff; box-shadow: 0 4px 15px rgba(180, 151, 214, 0.5); }
+        .btn:active { transform: scale(0.96); }
+        
+        /* Эффект кругов на воде (Ripple) */
+        .ripple {
+            position: absolute; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0); animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+        /* --- ПОДВАЛ --- */
+        footer { text-align: center; padding: 20px; font-size: 14px; color: #B497D6; background: #fff; position: relative; z-index: 10; }
+        footer a { color: #B497D6; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Пузыри -->
+    <div class="bubbles">
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    </div>
+
+    <header class="float-in">
+        <div class="logo">🐋 Сиреневый кит</div>
+        <div class="slogan">Скоростной маникюр в Томске</div>
+    </header>
+
+    <section class="features">
+        <div class="feature-item float-in"><span>5.0 ★</span> Рейтинг</div>
+        <div class="feature-item float-in" style="transition-delay: 0.1s;"><span>297</span> Отзывов</div>
+        <div class="feature-item float-in" style="transition-delay: 0.2s;"><span>70м</span> Среднее время</div>
+    </section>
+
+    <section class="works">
+        <h2 class="section-title float-in">Наши работы</h2>
+        <div class="grid">
+            <div class="card float-in">
+                <div class="card-photo">Фото работы</div>
+                <h3 class="card-title">Маникюр</h3>
+                <p class="card-price">от 2000 ₽</p>
+            </div>
+            <div class="card float-in">
+                <div class="card-photo">Фото работы</div>
+                <h3 class="card-title">Наращивание</h3>
+                <p class="card-price">от 3000 ₽</p>
+            </div>
+            <div class="card float-in">
+                <div class="card-photo">Фото работы</div>
+                <h3 class="card-title">Дизайн</h3>
+                <p class="card-price">от 500 ₽</p>
+            </div>
+            <div class="card float-in">
+                <div class="card-photo">Фото работы</div>
+                <h3 class="card-title">Педикюр</h3>
+                <p class="card-price">от 2500 ₽</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ВОЛНА ПОСЕРЕДИНЕ -->
+    <div class="wave-container">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,60 C320,120 420,0 720,60 C1020,120 1120,0 1440,60 L1440,120 L0,120 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- КОНТАКТЫ -->
+    <section class="contacts">
+        <h2 class="section-title float-in">Контакты</h2>
+        <p class="address float-in">г. Томск, Проспект Фрунзе, 25, офис 804 (8 этаж)</p>
+        
+        <!-- Телефон в контактах -->
+        <a href="tel:+79627790225" class="phone float-in">+7 962 779-02-25</a>
+        
+        <!-- Прямая ссылка в WhatsApp -->
+        <a href="https://wa.me/79627790225" class="btn btn-main float-in" target="_blank">Записаться в WhatsApp</a>
+        <a href="https://2gis.ru/tomsk/search/Проспект%20Фрунзе%2025" class="btn btn-secondary float-in" target="_blank">Построить маршрут</a>
+    </section>
+
+    <footer>
+        🐋 Сиреневый кит · Томск<br>
+        <a href="tel:+79627790225">+7 962 779-02-25</a>
+    </footer>
+
+    <!-- МАГИЯ JAVASCRIPT -->
+    <script>
+        // 1. Анимация всплытия при скролле (как в океане)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.float-in').forEach(el => observer.observe(el));
+
+        // 2. Эффект кругов на воде при нажатии на кнопки
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x - 10}px`;
+                ripple.style.top = `${y - 10}px`;
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => { ripple.remove(); }, 600);
+            });
+        });
+    </script>
+
+</body>
+  </html>
