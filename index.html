@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сиреневый кит — скоростной маникюр в Томске</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F8F4FB; color: #4A3B6B; line-height: 1.6; overflow-x: hidden; }
+        .bubbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .bubble { position: absolute; border-radius: 50%; background: rgba(180, 151, 214, 0.15); animation: float 6s infinite ease-in-out; }
+        .bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; top: 20%; }
+        .bubble:nth-child(2) { width: 120px; height: 120px; right: 5%; top: 40%; animation-delay: 2s; }
+        .bubble:nth-child(3) { width: 60px; height: 60px; left: 20%; bottom: 20%; animation-delay: 4s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        header { text-align: center; padding: 40px 20px 20px; }
+        .logo { font-size: 28px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .slogan { font-size: 16px; color: #B497D6; margin-top: 5px; font-weight: 500; }
+        .features { display: flex; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
+        .feature-item { background: #fff; border-radius: 50%; width: 100px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(180, 151, 214, 0.2); font-size: 12px; text-align: center; font-weight: bold; }
+        .feature-item span { font-size: 20px; color: #9FE2D4; margin-bottom: 2px; }
+        .works { padding: 40px 20px; text-align: center; }
+        .section-title { font-size: 24px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; max-width: 600px; margin: 0 auto; }
+        .card { background: #fff; border-radius: 20px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
+        .card-photo { width: 100%; height: 140px; background: #E8E0F0; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #B497D6; font-size: 14px; border: 2px dashed #B497D6; margin-bottom: 10px; }
+        .card-title { font-size: 16px; margin-bottom: 5px; }
+        .card-price { color: #B497D6; font-weight: bold; font-size: 15px; }
+        .contacts { padding: 40px 20px; background: #fff; text-align: center; border-top-left-radius: 30px; border-top-right-radius: 30px; margin-top: 20px; }
+        .address { font-size: 16px; margin-bottom: 20px; color: #888; }
+        .btn { display: inline-block; width: 100%; max-width: 300px; padding: 15px; margin-bottom: 10px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .btn-main { background: #9FE2D4; color: #4A3B6B; box-shadow: 0 4px 10px rgba(159, 226, 212, 0.4); }
+        .btn-secondary { background: #B497D6; color: #fff; box-shadow: 0 4px 10px rgba(180, 151, 214, 0.4); }
+        .btn:active { transform: scale(0.98); }
+        footer { text-align: center; padding: 20px; font-size: 14px; color: #B497D6; }
+    </style>
+</head>
+<body>
+    <div class="bubbles"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div>
+    <header>
+        <div class="logo">🐋 Сиреневый кит</div>
+        <div class="slogan">Скоростной маникюр в Томске</div>
+    </header>
+    <section class="features">
+        <div class="feature-item"><span>5.0 ★</span>Рейтинг</div>
+        <div class="feature-item"><span>297</span>Отзывов</div>
+        <div class="feature-item"><span>70м</span>Среднее время</div>
+    </section>
+    <section class="works">
+        <h2 class="section-title">Наши работы</h2>
+        <div class="grid">
+            <div class="card"><div class="card-photo">Фото работы</div><h3 class="card-title">Маникюр</h3><p class="card-price">от 2000 ₽</p></div>
+            <div class="card"><div class="card-photo">Фото работы</div><h3 class="card-title">Наращивание</h3><p class="card-price">от 3000 ₽</p></div>
+            <div class="card"><div class="card-photo">Фото работы</div><h3 class="card-title">Дизайн</h3><p class="card-price">от 500 ₽</p></div>
+            <div class="card"><div class="card-photo">Фото работы</div><h3 class="card-title">Педикюр</h3><p class="card-price">от 2500 ₽</p></div>
+        </div>
+    </section>
+    <section class="contacts">
+        <h2 class="section-title">Контакты</h2>
+        <p class="address">г. Томск, Проспект Фрунзе, 25, офис 804 (8 этаж)</p>
+        <a href="https://wa.me/79627790225" class="btn btn-main" target="_blank">Записаться в WhatsApp</a>
+        <a href="https://2gis.ru/tomsk/search/Проспект%20Фрунзе%2025" class="btn btn-secondary" target="_blank">Построить маршрут</a>
+    </section>
+    <footer>🐋 Сиреневый кит · Томск</footer>
+</body>
+</html>
